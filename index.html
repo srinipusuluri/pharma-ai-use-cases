@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI in Pharmaceuticals & Life Sciences - Comprehensive Use Cases</title>
+    <style>
+        :root {
+            --primary-color: #8b5cf6;
+            --secondary-color: #06b6d4;
+            --accent-color: #22c55e;
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+            --pharma-purple: #8b5cf6;
+            --science-cyan: #06b6d4;
+            --bio-green: #22c55e;
+            --lab-blue: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-color), #0b1220);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--pharma-purple), var(--science-cyan), var(--bio-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            border-color: var(--primary-color);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, var(--pharma-purple), var(--science-cyan));
+            border: none;
+        }
+
+        .content-section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            border-color: rgba(255,255,255,0.1);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--pharma-purple), var(--science-cyan), var(--bio-green));
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .icon.ml { background: rgba(139, 92, 246, 0.2); color: var(--pharma-purple); }
+        .icon.gen { background: rgba(6, 182, 212, 0.2); color: var(--science-cyan); }
+        .icon.ag { background: rgba(34, 197, 94, 0.2); color: var(--bio-green); }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-content {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--pharma-purple), var(--science-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-diagram {
+            background: rgba(0,0,0,0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .architecture-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .architecture-item::before {
+            content: '→';
+            color: var(--pharma-purple);
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.1));
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-title {
+            color: var(--pharma-purple);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .metric-card {
+            background: rgba(255,255,255,0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--pharma-purple);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .pharma-icon {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        .clinical-badge {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        .genomics-badge {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            margin-left: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💊 AI in Pharmaceuticals & Life Sciences</h1>
+            <p class="subtitle">Comprehensive Guide to Machine Learning, Generative AI, and Agentic Systems in Drug Discovery & Healthcare</p>
+        </header>
+
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="showSection('ml')">🔮 ML / Predictive</button>
+            <button class="nav-btn" onclick="showSection('gen')">✍️ Generative AI</button>
+            <button class="nav-btn" onclick="showSection('agentic')">🤖 Agentic AI</button>
+        </div>
+
+        <!-- ML / Predictive Use Cases -->
+        <div id="ml" class="content-section active">
+            <h2 class="section-title">🔮 Machine Learning & Predictive Analytics</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Advanced statistical models and algorithms for drug discovery, clinical trials, and pharmaceutical optimization
+            </p>
+
+            <div class="card-grid">
+                <!-- Molecule Property Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🧪</div>
+                        <div>
+                            <div class="card-title">Molecule Property Prediction</div>
+                            <div class="card-subtitle">Drug Discovery Optimization</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict molecular properties and biological activities to accelerate drug discovery and reduce experimental costs.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Deep Learning</span>
+                            <span class="tech-tag">Molecular Graph Neural Networks</span>
+                            <span class="tech-tag">Quantum Chemistry</span>
+                            <span class="tech-tag">QSAR Modeling</span>
+                            <span class="tech-tag">Property Prediction</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Molecular Structure → Feature Extraction → Property Prediction → Activity Assessment → Candidate Selection</div>
+                            <div class="architecture-item">Chemical Data → Similarity Analysis → Binding Affinity → Toxicity Prediction → Optimization</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Chemical compound databases (ChEMBL, PubChem)</li>
+                                <li>Biological assay data and activity measurements</li>
+                                <li>Protein-ligand interaction data</li>
+                                <li>ADMET (Absorption, Distribution, Metabolism, Excretion, Toxicity) profiles</li>
+                                <li>Crystal structure and docking data</li>
+                                <li>Historical drug development data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">70-90%</div>
+                                <div class="metric-label">Prediction Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-80%</div>
+                                <div class="metric-label">Development Time</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">$50M-200M</div>
+                                <div class="metric-label">Cost Savings/Candidate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clinical Trial Success Prediction -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🏥</div>
+                        <div>
+                            <div class="card-title">Clinical Trial Success Prediction</div>
+                            <div class="card-subtitle">Trial Outcome Modeling</div>
+                            <span class="clinical-badge">Clinical</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict the likelihood of clinical trial success to optimize resource allocation and reduce development risks.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Survival Analysis</span>
+                            <span class="tech-tag">Bayesian Modeling</span>
+                            <span class="tech-tag">Historical Trial Data</span>
+                            <span class="tech-tag">Risk Assessment</span>
+                            <span class="tech-tag">Enrollment Prediction</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Trial Design → Historical Analysis → Success Probability → Risk Assessment → Optimization</div>
+                            <div class="architecture-item">Patient Population → Endpoint Selection → Site Performance → Enrollment Forecast → Outcome Prediction</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Historical clinical trial databases</li>
+                                <li>Protocol designs and outcomes</li>
+                                <li>Enrollment patterns and retention rates</li>
+                                <li>Site performance and capabilities</li>
+                                <li>Regulatory submission data</li>
+                                <li>Competitor trial information</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">75-85%</div>
+                                <div class="metric-label">Success Prediction</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Trial Costs</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">1-2 years</div>
+                                <div class="metric-label">Development Time</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Patient Recruitment Modeling -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">👥</div>
+                        <div>
+                            <div class="card-title">Patient Recruitment Modeling</div>
+                            <div class="card-subtitle">Trial Enrollment Optimization</div>
+                            <span class="clinical-badge">Clinical</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict and optimize patient recruitment for clinical trials to meet enrollment targets efficiently.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Predictive Analytics</span>
+                            <span class="tech-tag">Geospatial Analysis</span>
+                            <span class="tech-tag">Patient Matching</span>
+                            <span class="tech-tag">Site Selection</span>
+                            <span class="tech-tag">Enrollment Forecasting</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Patient Population → Eligibility Matching → Recruitment Prediction → Site Optimization → Enrollment Strategy</div>
+                            <div class="architecture-item">Demographics → Medical Records → Site Capabilities → Marketing Strategy → Retention Planning</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Electronic health records and claims data</li>
+                                <li>Demographic and geographic information</li>
+                                <li>Site performance and capacity data</li>
+                                <li>Competing trial information</li>
+                                <li>Patient preferences and behaviors</li>
+                                <li>Physician referral patterns</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Recruitment Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">25-40%</div>
+                                <div class="metric-label">Enrollment Time</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">20-35%</div>
+                                <div class="metric-label">Recruitment Costs</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Adverse Event Detection -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">⚠️</div>
+                        <div>
+                            <div class="card-title">Adverse Event Detection</div>
+                            <div class="card-subtitle">Pharmacovigilance</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Detect and predict adverse drug reactions to enhance patient safety and regulatory compliance.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Natural Language Processing</span>
+                            <span class="tech-tag">Signal Detection</span>
+                            <span class="tech-tag">Pattern Recognition</span>
+                            <span class="tech-tag">Risk Assessment</span>
+                            <span class="tech-tag">Real-time Monitoring</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Report Data → Signal Detection → Risk Assessment → Causality Analysis → Regulatory Reporting</div>
+                            <div class="architecture-item">Medical Records → Pattern Recognition → Early Warning → Investigation → Mitigation</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Spontaneous adverse event reports</li>
+                                <li>Electronic health records</li>
+                                <li>Claims and insurance data</li>
+                                <li>Literature and clinical trial data</li>
+                                <li>Social media and patient forums</li>
+                                <li>Regulatory databases (FAERS, EudraVigilance)</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Detection Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Detection Speed</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">False Positives</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Genomic Pattern Detection -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🧬</div>
+                        <div>
+                            <div class="card-title">Genomic Pattern Detection</div>
+                            <div class="card-subtitle">Precision Medicine</div>
+                            <span class="genomics-badge">Genomics</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Identify genomic patterns and biomarkers to enable personalized medicine and targeted therapies.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Genomic Analytics</span>
+                            <span class="tech-tag">Machine Learning</span>
+                            <span class="tech-tag">Biomarker Discovery</span>
+                            <span class="tech-tag">Variant Analysis</span>
+                            <span class="tech-tag">Pathway Analysis</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Genomic Data → Variant Calling → Pattern Recognition → Biomarker Discovery → Clinical Correlation</div>
+                            <div class="architecture-item">Sequencing Data → Annotation → Functional Analysis → Drug Response → Treatment Optimization</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Whole genome and exome sequencing data</li>
+                                <li>RNA-seq and expression data</li>
+                                <li>Epigenomic and methylation data</li>
+                                <li>Clinical phenotype and outcome data</li>
+                                <li>Pharmacogenomic databases</li>
+                                <li>Population genomics data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-95%</div>
+                                <div class="metric-label">Biomarker Discovery</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Treatment Response</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Adverse Events</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Drug Interaction Modeling -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ml">🔄</div>
+                        <div>
+                            <div class="card-title">Drug Interaction Modeling</div>
+                            <div class="card-subtitle">Polypharmacy Safety</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Predict potential drug-drug interactions to prevent adverse effects and optimize combination therapies.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Interaction Networks</span>
+                            <span class="tech-tag">Pharmacokinetic Modeling</span>
+                            <span class="tech-tag">Mechanistic Analysis</span>
+                            <span class="tech-tag">Risk Assessment</span>
+                            <span class="tech-tag">Clinical Decision Support</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Drug Properties → Interaction Prediction → Mechanism Analysis → Risk Assessment → Clinical Guidance</div>
+                            <div class="architecture-item">Metabolic Pathways → Binding Sites → Transporters → Toxicity Prediction → Safety Monitoring</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Drug interaction databases (DrugBank, KEGG)</li>
+                                <li>Metabolic pathway information</li>
+                                <li>Enzyme and transporter data</li>
+                                <li>Clinical case reports</li>
+                                <li>Pharmacokinetic parameters</li>
+                                <li>Population-level interaction data</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Interaction Detection</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Adverse Events</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">Real-time</div>
+                                <div class="metric-label">Alerting</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Generative AI Use Cases -->
+        <div id="gen" class="content-section">
+            <h2 class="section-title">✍️ Generative AI Applications</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                AI-powered content generation, scientific writing, and documentation in pharmaceutical research and development
+            </p>
+
+            <div class="card-grid">
+                <!-- Clinical Trial Protocol Drafting -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📋</div>
+                        <div>
+                            <div class="card-title">Clinical Trial Protocol Drafting</div>
+                            <div class="card-subtitle">Study Design Documentation</div>
+                            <span class="clinical-badge">Clinical</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automatically generate comprehensive clinical trial protocols with standardized structure and regulatory compliance.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Regulatory Knowledge</span>
+                            <span class="tech-tag">Template-based Generation</span>
+                            <span class="tech-tag">Scientific Writing</span>
+                            <span class="tech-tag">Compliance Checking</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Study Objectives → Design Specification → Protocol Generation → Regulatory Review → Finalization</div>
+                            <div class="architecture-item">Inclusion/Exclusion → Endpoints → Statistical Plan → Safety Monitoring → Documentation</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Regulatory guidelines (ICH, FDA, EMA)</li>
+                                <li>Historical protocol templates</li>
+                                <li>Clinical trial best practices</li>
+                                <li>Therapeutic area expertise</li>
+                                <li>Statistical analysis plans</li>
+                                <li>Safety monitoring requirements</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">70-85%</div>
+                                <div class="metric-label">Protocol Development Time</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Regulatory Compliance</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">4-6 weeks</div>
+                                <div class="metric-label">Protocol Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Regulatory Submission Writing -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📄</div>
+                        <div>
+                            <div class="card-title">Regulatory Submission Writing</div>
+                            <div class="card-subtitle">IND/NDA Documentation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate comprehensive regulatory submissions including IND, NDA, and MAA documents with technical accuracy.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Regulatory Frameworks</span>
+                            <span class="tech-tag">Technical Documentation</span>
+                            <span class="tech-tag">Quality Assurance</span>
+                            <span class="tech-tag">Submission Standards</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Data Compilation → Section Generation → Cross-referencing → Quality Review → Submission Package</div>
+                            <div class="architecture-item">CMC Data → Non-clinical → Clinical → Safety → Efficacy → Integration</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Regulatory submission templates</li>
+                                <li>Previous successful submissions</li>
+                                <li>Agency guidance documents</li>
+                                <li>Therapeutic area requirements</li>
+                                <li>Quality and safety data</li>
+                                <li>Clinical trial results</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Submission Preparation Time</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">95-99%</div>
+                                <div class="metric-label">Document Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">3-6 months</div>
+                                <div class="metric-label">Submission Timeline</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Scientific Literature Summarization -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">📚</div>
+                        <div>
+                            <div class="card-title">Scientific Literature Summarization</div>
+                            <div class="card-subtitle">Research Intelligence</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Summarize and analyze scientific literature to extract insights and support research decisions.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Scientific NLP</span>
+                            <span class="tech-tag">Knowledge Extraction</span>
+                            <span class="tech-tag">Trend Analysis</span>
+                            <span class="tech-tag">Evidence Synthesis</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Literature Search → Content Analysis → Key Finding Extraction → Insight Generation → Knowledge Base</div>
+                            <div class="architecture-item">Publication Data → Citation Analysis → Impact Assessment → Research Gaps → Opportunity Identification</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Scientific publication databases</li>
+                                <li>Patent literature</li>
+                                <li>Clinical trial registries</li>
+                                <li>Conference proceedings</li>
+                                <li>Expert commentary</li>
+                                <li>Competitive intelligence</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Information Retention</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Research Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">5-10 minutes</div>
+                                <div class="metric-label">Summary Generation</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Synthetic Molecular Design -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">🧪</div>
+                        <div>
+                            <div class="card-title">Synthetic Molecular Design</div>
+                            <div class="card-subtitle">De Novo Drug Design</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate novel molecular structures with desired properties using AI-driven design principles.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Generative Models</span>
+                            <span class="tech-tag">Molecular Optimization</span>
+                            <span class="tech-tag">Property Constraints</span>
+                            <span class="tech-tag">Synthetic Accessibility</span>
+                            <span class="tech-tag">Drug-likeness</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Target Requirements → Molecular Generation → Property Optimization → Synthetic Planning → Candidate Selection</div>
+                            <div class="architecture-item">Binding Constraints → Diversity Generation → ADMET Optimization → Patentability → Development</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Chemical structure databases</li>
+                                <li>Synthetic reaction pathways</li>
+                                <li>Property prediction models</li>
+                                <li>Patent landscape data</li>
+                                <li>Synthetic accessibility rules</li>
+                                <li>Target protein structures</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">80-95%</div>
+                                <div class="metric-label">Drug-likeness</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Synthetic Feasibility</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">10-100x</div>
+                                <div class="metric-label">Design Speed</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medical Affairs Content -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">🏥</div>
+                        <div>
+                            <div class="card-title">Medical Affairs Content</div>
+                            <div class="card-subtitle">Scientific Communication</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate scientific and medical content for healthcare professionals, including publications and educational materials.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Medical Writing</span>
+                            <span class="tech-tag">Scientific Accuracy</span>
+                            <span class="tech-tag">Audience Targeting</span>
+                            <span class="tech-tag">Compliance Review</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Scientific Data → Content Strategy → Draft Generation → Medical Review → Publication</div>
+                            <div class="architecture-item">Key Messages → Format Selection → Content Creation → Compliance Check → Distribution</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Clinical trial data and results</li>
+                                <li>Scientific publications</li>
+                                <li>Medical guidelines</li>
+                                <li>Key opinion leader insights</li>
+                                <li>Target audience profiles</li>
+                                <li>Publication standards</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Content Development Time</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Scientific Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Content Consistency</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Adverse Event Narratives -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon gen">⚠️</div>
+                        <div>
+                            <div class="card-title">Adverse Event Narratives</div>
+                            <div class="card-subtitle">Safety Reporting</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Generate detailed adverse event narratives for regulatory reporting and safety assessment.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">GPT-4/Claude</span>
+                            <span class="tech-tag">Medical Documentation</span>
+                            <span class="tech-tag">Regulatory Standards</span>
+                            <span class="tech-tag">Causality Assessment</span>
+                            <span class="tech-tag">Safety Analysis</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Event Data → Medical Review → Narrative Generation → Causality Assessment → Regulatory Submission</div>
+                            <div class="architecture-item">Patient History → Event Description → Assessment → Outcome → Follow-up</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Adverse event case reports</li>
+                                <li>Medical history data</li>
+                                <li>Drug administration records</li>
+                                <li>Concomitant medications</li>
+                                <li>Medical literature</li>
+                                <li>Regulatory reporting requirements</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">75-90%</div>
+                                <div class="metric-label">Narrative Quality</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Reporting Time</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">95-99%</div>
+                                <div class="metric-label">Regulatory Compliance</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Agentic AI Use Cases -->
+        <div id="agentic" class="content-section">
+            <h2 class="section-title">🤖 Agentic AI Systems</h2>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 3rem;">
+                Autonomous AI agents that can reason, plan, and execute complex pharmaceutical research and development workflows
+            </p>
+
+            <div class="card-grid">
+                <!-- Multi-agent Drug Discovery System -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🧪</div>
+                        <div>
+                            <div class="card-title">Multi-agent Drug Discovery</div>
+                            <div class="card-subtitle">Integrated Research Platform</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Coordinate multiple specialized AI agents to accelerate the entire drug discovery pipeline from target identification to lead optimization.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Multi-Agent Systems</span>
+                            <span class="tech-tag">Target Validation</span>
+                            <span class="tech-tag">Hit Discovery</span>
+                            <span class="tech-tag">Lead Optimization</span>
+                            <span class="tech-tag">Preclinical Development</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Target Identification → Validation → Hit Screening → Lead Optimization → Preclinical Testing</div>
+                            <div class="architecture-item">Data Integration → Hypothesis Generation → Experiment Design → Analysis → Iteration</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Genomic and proteomic databases</li>
+                                <li>Chemical compound libraries</li>
+                                <li>Biological assay data</li>
+                                <li>ADMET prediction models</li>
+                                <li>Clinical trial data</li>
+                                <li>Scientific literature</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">50-70%</div>
+                                <div class="metric-label">Discovery Timeline</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Development Costs</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">2-3x</div>
+                                <div class="metric-label">Success Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Clinical Trial Orchestration Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🏥</div>
+                        <div>
+                            <div class="card-title">Clinical Trial Orchestration</div>
+                            <div class="card-subtitle">Trial Management Automation</div>
+                            <span class="clinical-badge">Clinical</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automate and optimize clinical trial operations including site management, patient monitoring, and data collection.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Trial Management</span>
+                            <span class="tech-tag">Site Coordination</span>
+                            <span class="tech-tag">Patient Monitoring</span>
+                            <span class="tech-tag">Data Integration</span>
+                            <span class="tech-tag">Risk Management</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Trial Setup → Site Activation → Patient Recruitment → Data Collection → Monitoring → Analysis</div>
+                            <div class="architecture-item">Protocol Compliance → Safety Monitoring → Quality Control → Regulatory Reporting → Closeout</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Clinical trial management systems</li>
+                                <li>Electronic data capture systems</li>
+                                <li>Patient monitoring data</li>
+                                <li>Site performance metrics</li>
+                                <li>Regulatory requirements</li>
+                                <li>Safety databases</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Trial Management Time</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">25-40%</div>
+                                <div class="metric-label">Operational Costs</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Data Quality</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pharmacovigilance Monitoring Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">⚠️</div>
+                        <div>
+                            <div class="card-title">Pharmacovigilance Monitoring</div>
+                            <div class="card-subtitle">Drug Safety Surveillance</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Continuously monitor drug safety signals and automate adverse event reporting and risk assessment.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Safety Signal Detection</span>
+                            <span class="tech-tag">Risk Assessment</span>
+                            <span class="tech-tag">Regulatory Reporting</span>
+                            <span class="tech-tag">Trend Analysis</span>
+                            <span class="tech-tag">Risk Mitigation</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Data Collection → Signal Detection → Risk Assessment → Regulatory Reporting → Risk Management</div>
+                            <div class="architecture-item">Adverse Event Data → Pattern Analysis → Causality Assessment → Safety Update → Mitigation</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Global adverse event databases</li>
+                                <li>Electronic health records</li>
+                                <li>Literature monitoring</li>
+                                <li>Social media surveillance</li>
+                                <li>Regulatory intelligence</li>
+                                <li>Risk management plans</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">85-95%</div>
+                                <div class="metric-label">Signal Detection</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">70-85%</div>
+                                <div class="metric-label">Reporting Speed</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Risk Assessment Time</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lab Experiment Coordination Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🔬</div>
+                        <div>
+                            <div class="card-title">Lab Experiment Coordination</div>
+                            <div class="card-subtitle">Research Automation</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Automate laboratory experiment design, execution, and analysis to accelerate research workflows.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Laboratory Automation</span>
+                            <span class="tech-tag">Experiment Design</span>
+                            <span class="tech-tag">Data Analysis</span>
+                            <span class="tech-tag">Instrument Integration</span>
+                            <span class="tech-tag">Quality Control</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Hypothesis → Experiment Design → Protocol Execution → Data Collection → Analysis → Conclusion</div>
+                            <div class="architecture-item">Reagent Management → Instrument Control → Data Processing → Quality Assurance → Reporting</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Laboratory information management systems</li>
+                                <li>Instrument data feeds</li>
+                                <li>Protocol databases</li>
+                                <li>Reagent inventories</li>
+                                <li>Quality control standards</li>
+                                <li>Research protocols</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">60-80%</div>
+                                <div class="metric-label">Experiment Throughput</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Manual Labor</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">25-45%</div>
+                                <div class="metric-label">Error Rate</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Medical Information Response Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">💬</div>
+                        <div>
+                            <div class="card-title">Medical Information Response</div>
+                            <div class="card-subtitle">HCP Support System</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Provide accurate, timely responses to healthcare professional inquiries about pharmaceutical products and therapies.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Medical Knowledge Base</span>
+                            <span class="tech-tag">Query Processing</span>
+                            <span class="tech-tag">Response Generation</span>
+                            <span class="tech-tag">Compliance Monitoring</span>
+                            <span class="tech-tag">Feedback Analysis</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">HCP Inquiry → Knowledge Retrieval → Response Generation → Compliance Check → Delivery</div>
+                            <div class="architecture-item">Medical Data → Evidence Review → Response Drafting → Quality Assurance → Follow-up</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Product monographs and labels</li>
+                                <li>Clinical trial data</li>
+                                <li>Medical literature</li>
+                                <li>Regulatory communications</li>
+                                <li>Competitor information</li>
+                                <li>HCP feedback and queries</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">90-95%</div>
+                                <div class="metric-label">Response Accuracy</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">80-90%</div>
+                                <div class="metric-label">Response Time</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">24/7</div>
+                                <div class="metric-label">Availability</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- R&D Knowledge Assistant Agent -->
+                <div class="card">
+                    <div class="card-header">
+                        <div class="icon ag">🧠</div>
+                        <div>
+                            <div class="card-title">R&D Knowledge Assistant</div>
+                            <div class="card-subtitle">Research Intelligence</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-content">
+                        <p><strong>Objective:</strong> Provide researchers with intelligent access to scientific knowledge, data analysis, and research guidance.</p>
+                        
+                        <div class="tech-stack">
+                            <span class="tech-tag">Knowledge Management</span>
+                            <span class="tech-tag">Data Analytics</span>
+                            <span class="tech-tag">Research Guidance</span>
+                            <span class="tech-tag">Literature Mining</span>
+                            <span class="tech-tag">Collaboration Support</span>
+                        </div>
+
+                        <div class="architecture-diagram">
+                            <div class="architecture-item">Research Question → Knowledge Search → Data Analysis → Insight Generation → Recommendation</div>
+                            <div class="architecture-item">Literature Review → Hypothesis Generation → Experiment Planning → Result Analysis → Publication</div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <span class="highlight-title">Ground Data Strategy:</span>
+                            <ul>
+                                <li>Scientific databases and publications</li>
+                                <li>Internal research data</li>
+                                <li>Patent databases</li>
+                                <li>Collaboration platforms</li>
+                                <li>Research protocols</li>
+                                <li>Expert networks</li>
+                            </ul>
+                        </div>
+
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">70-85%</div>
+                                <div class="metric-label">Research Efficiency</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">40-60%</div>
+                                <div class="metric-label">Knowledge Discovery</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">30-50%</div>
+                                <div class="metric-label">Time to Insight</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>✨ Built with cutting-edge AI technologies for the future of pharmaceuticals and life sciences</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-secondary);">
+                Note: Implementation requires careful consideration of regulatory compliance, data privacy, and scientific validation
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update navigation buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Find and activate the clicked button
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
